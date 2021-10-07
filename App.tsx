@@ -1,21 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar, SafeAreaView } from 'react-native';
+import styled, { ThemeProvider } from 'styled-components/native';
+import AppLoading from 'expo-app-loading';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import SeedPhraseScreen from './screens/SeedPhrase/index';
+import theme from './theme';
+import useLoadFonts from './hooks/useLoadFonts';
+
+declare module 'styled-components' {
+  export interface DefaultTheme {
+    colors: typeof theme.colors;
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const MainSafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${theme.colors.light};
+  padding-top: ${Platform.OS === 'android' ? StatusBar.currentHeight : 0};
+`;
+
+export default function App() {
+  const fontsLoaded = useLoadFonts();
+  return !fontsLoaded ? (
+    <AppLoading />
+  ) : (
+    <MainSafeAreaView>
+      <ThemeProvider theme={theme}>
+        <SeedPhraseScreen />
+      </ThemeProvider>
+    </MainSafeAreaView>
+  );
+}
