@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
-import { Text } from 'react-native';
-import styled from 'styled-components/native';
+import { Text, useWindowDimensions } from 'react-native';
+import styled, { css } from 'styled-components/native';
 
-import { theme } from '../constants';
+import { StandarScreenSizes, theme } from '../constants';
 import CText from './CText';
 
 const MainContainer = styled.View`
@@ -29,21 +29,32 @@ const TextContainerView = styled.View`
   padding: 8px;
 `;
 
+const WordText = styled(CText)<{ screenWidth: number }>`
+  ${({ screenWidth }) =>
+    screenWidth > parseInt(StandarScreenSizes.laptop) &&
+    css`
+      font-size: 20px;
+    `}
+`;
+
 const WordContainer = ({
   name,
   id,
 }: {
   name: string;
   id: number;
-}): ReactElement => (
-  <MainContainer>
-    <NumberContainerView>
-      <CText style={{ color: theme.colors.light }}>{id}</CText>
-    </NumberContainerView>
-    <TextContainerView>
-      <CText>{name}</CText>
-    </TextContainerView>
-  </MainContainer>
-);
+}): ReactElement => {
+  const { width } = useWindowDimensions();
+  return (
+    <MainContainer>
+      <NumberContainerView>
+        <CText style={{ color: theme.colors.light }}>{id}</CText>
+      </NumberContainerView>
+      <TextContainerView>
+        <WordText screenWidth={width}>{name}</WordText>
+      </TextContainerView>
+    </MainContainer>
+  );
+};
 
 export default WordContainer;

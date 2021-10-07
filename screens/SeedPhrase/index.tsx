@@ -29,22 +29,34 @@ const BodyContainerView = styled.View<{ screenWidth: number }>`
     `}
 `;
 
-const InstructionText = styled(CText)`
+const InstructionText = styled(CText)<{ screenWidth: number }>`
   color: ${(props) => props.theme.colors.gray3};
-  font-size: ${() => RFPercentage(2)};
+  font-size: 16px;
   text-align: center;
+
+  ${({ screenWidth }) =>
+    screenWidth > parseInt(StandarScreenSizes.laptop) &&
+    css`
+      font-size: 20px;
+    `}
 `;
 
-const ClickableText = styled(CText)`
+const ClickableText = styled(CText)<{ screenWidth: number }>`
   color: ${(props) => props.theme.colors.default};
   text-decoration: underline;
   text-decoration-color: ${(props) => props.theme.colors.default};
-  font-size: ${() => RFPercentage(2)};
+  font-size: 15px;
+
+  ${({ screenWidth }) =>
+    screenWidth > parseInt(StandarScreenSizes.laptop) &&
+    css`
+      font-size: 18px;
+    `}
 `;
 
 const PhassPhraseScreen = (): ReactElement => {
   const [copied, setCopied] = useState(false);
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const CopySeedPhraseToClipboard = () => {
     Clipboard?.setString(
@@ -65,7 +77,7 @@ const PhassPhraseScreen = (): ReactElement => {
     <MainContainerView>
       <Header headerText={'BACKUP MY WALLET'} />
       <BodyContainerView screenWidth={width}>
-        <InstructionText>
+        <InstructionText screenWidth={width}>
           <CText style={{ fontWeight: 'bold' }}>
             please save your 12-word pass phrase
           </CText>
@@ -74,11 +86,11 @@ const PhassPhraseScreen = (): ReactElement => {
           anytime
         </InstructionText>
         <WordsList seedPhraseData={seedPhraseData} />
-        <ClickableText onPress={CopySeedPhraseToClipboard}>
+        <ClickableText screenWidth={width} onPress={CopySeedPhraseToClipboard}>
           Copy all to clipboard
           {copied && '*'}
         </ClickableText>
-        <ClickableText onPress={SendPhraseToEmail}>
+        <ClickableText screenWidth={width} onPress={SendPhraseToEmail}>
           Send me a backup email
         </ClickableText>
         <Button onPress={() => Alert.alert('Done!')} label={'DONE'} />
