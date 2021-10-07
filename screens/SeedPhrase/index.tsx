@@ -3,12 +3,11 @@ import { Alert, useWindowDimensions } from 'react-native';
 import styled, { css } from 'styled-components/native';
 import * as Clipboard from 'expo-clipboard';
 import * as Linking from 'expo-linking';
-import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import WordsList from './WordsList';
 import Header from '../../components/Header';
 import CText from '../../components/CText';
-import { StandarScreenSizes, theme } from '../../constants';
+import { StandarScreenSizes } from '../../constants';
 import Button from '../../components/Button';
 import { seedPhraseData } from '../../constants';
 
