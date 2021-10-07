@@ -6,11 +6,10 @@ import CText from './CText';
 
 const PressableContainer = styled.Pressable`
   background-color: ${(props) => props.theme.colors.default};
-  max-height: 55px;
+  height: 55px;
   max-width: ${parseInt(StandarScreenSizes.tablet)}px;
   width: 100%;
   border-radius: 80px;
-  flex: 1;
   align-items: center;
   justify-content: center;
 `;
