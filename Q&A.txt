@@ -1,0 +1,17 @@
+- elaborate and explain your reasoning: which components/visuals you decided to make responsive and which you didn't and why.
+
+In order to add consistency across multiple sized screen devices, I decided to add at least a small layer of responsiveness in all of the components either by using flex, or my own version of media queries using the useWindowDimensions hook. 
+
+I made the word container  component specially responsive and sensible to changes in the screen size as it is the key information being displayed in this screen. I made sure that the seedPhrase was easily readable no matter what the screen size was.
+
+One thing to notice is that I added several mediaQueries equivalent, in order to implement bigger responsive change from the mobile screen sizes and the PC's.  I decided to change the main layout from adding space-between in mobile to space-around, as I believe this helps with content centralization in larger screens but makes the app look bloated when on smaller devices.
+
+- specifically describe how you are handling fonts
+
+In this case the design uses the Roboto font as a main font, this is a native font for android devices but it is unavailable on IOs and web. 
+In order to make the font available in all devices I used an expo library called @expo-google-fonts/roboto which ads the fonts to the fonts to the app. 
+
+I created a hook called useLoadFonts that is being called int the app's entry function (App.tsx), it contains all the @expo-google-fonts loading logic, and keeps the app component clean and readable. 
+Inside of the app component I rendered the AppLoading component from expo which keeps the splashscreen on screen until the components stops rendering, this allows the app to wait for the fonts to get cached before rendering any screen that might need it.
+
+Since all Text components use the Roboto font, and there is no current way to change the global css of a component in react-native, I decided to create a Custom text component using the styled components Text that had the Roboto font set as a default style.
