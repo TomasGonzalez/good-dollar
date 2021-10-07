@@ -1,11 +1,11 @@
 import React from 'react';
-import { Platform, StatusBar, SafeAreaView } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import styled, { ThemeProvider } from 'styled-components/native';
 import AppLoading from 'expo-app-loading';
 
 import SeedPhraseScreen from './screens/SeedPhrase/index';
-import theme from './theme';
 import useLoadFonts from './hooks/useLoadFonts';
+import { theme } from './constants';
 
 declare module 'styled-components' {
   export interface DefaultTheme {

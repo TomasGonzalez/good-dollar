@@ -1,8 +1,33 @@
 import React, { ReactElement } from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
 
-const MainContainer = styled.View``;
+import { theme } from '../constants';
+import CText from './CText';
+
+const MainContainer = styled.View`
+  flex-direction: row;
+  margin: 4px;
+  flex-basis: 45%;
+  flex-shrink: 1;
+  border: 1px solid ${(props) => props.theme.colors.default};
+  border-radius: 80px;
+`;
+
+const NumberContainerView = styled.View`
+  flex: 1;
+  background-color: ${(props) => props.theme.colors.default};
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TextContainerView = styled.View`
+  flex: 5;
+  justify-content: center;
+  padding: 8px;
+`;
 
 const WordContainer = ({
   name,
@@ -12,8 +37,12 @@ const WordContainer = ({
   id: number;
 }): ReactElement => (
   <MainContainer>
-    <Text>{id}</Text>
-    <Text>{name}</Text>
+    <NumberContainerView>
+      <CText style={{ color: theme.colors.light }}>{id}</CText>
+    </NumberContainerView>
+    <TextContainerView>
+      <CText>{name}</CText>
+    </TextContainerView>
   </MainContainer>
 );
 

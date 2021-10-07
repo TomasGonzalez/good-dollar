@@ -1,12 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/native';
+
 import WordContainer from '../../components/WordContainer';
+import { SeedPhraseDataType } from '../../types';
 
-import { seedPhraseData } from '../../constants';
+const MainContainerView = styled.View`
+  flex-flow: wrap;
+  justify-content: space-around;
+  align-items: center;
+`;
 
-const MainContainerView = styled.View``;
-
-const WordsList = () => (
+const WordsList = ({
+  seedPhraseData,
+}: {
+  seedPhraseData: SeedPhraseDataType;
+}) => (
   <MainContainerView>
     {seedPhraseData.map((word) => (
       <WordContainer key={word.id} {...word} />
