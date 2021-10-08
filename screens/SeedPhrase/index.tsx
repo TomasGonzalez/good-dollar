@@ -11,8 +11,14 @@ import { StandarScreenSizes } from '../../constants';
 import Button from '../../components/Button';
 import { seedPhraseData } from '../../constants';
 
-const MainContainerView = styled.View`
+const MainContainerView = styled.View<{ screenWidth: number }>`
   flex: 1;
+
+  ${({ screenWidth }) =>
+    screenWidth > parseInt(StandarScreenSizes.laptop) &&
+    css`
+      min-height: 600px;
+    `}
 `;
 
 const BodyContainerView = styled.View<{ screenWidth: number }>`
@@ -73,7 +79,7 @@ const PhassPhraseScreen = (): ReactElement => {
   };
 
   return (
-    <MainContainerView>
+    <MainContainerView screenWidth={width}>
       <Header headerText={'BACKUP MY WALLET'} />
       <BodyContainerView screenWidth={width}>
         <InstructionText screenWidth={width}>
