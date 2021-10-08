@@ -1,4 +1,4 @@
-import React, { ReactElement, memo } from 'react';
+import React, { ReactElement } from 'react';
 import { useWindowDimensions } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
@@ -57,4 +57,4 @@ const WordContainer = ({
   );
 };
 
-export default memo(WordContainer);
+export default WordContainer;
