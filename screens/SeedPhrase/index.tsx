@@ -57,14 +57,14 @@ const PhassPhraseScreen = (): ReactElement => {
   const [copied, setCopied] = useState(false);
   const { width } = useWindowDimensions();
 
-  const CopySeedPhraseToClipboard = () => {
+  const copySeedPhraseToClipboard = () => {
     Clipboard?.setString(
       seedPhraseData.map((wordObject) => wordObject.name).join(', ')
     );
     setCopied(true);
   };
 
-  const SendPhraseToEmail = () => {
+  const sendPhraseToEmail = () => {
     Linking.openURL(
       `mailto:?subject=SeedPhrase&body=${seedPhraseData
         .map((wordObject) => wordObject.name)
@@ -85,11 +85,11 @@ const PhassPhraseScreen = (): ReactElement => {
           anytime
         </InstructionText>
         <WordsList seedPhraseData={seedPhraseData} />
-        <ClickableText screenWidth={width} onPress={CopySeedPhraseToClipboard}>
+        <ClickableText screenWidth={width} onPress={copySeedPhraseToClipboard}>
           Copy all to clipboard
           {copied && '*'}
         </ClickableText>
-        <ClickableText screenWidth={width} onPress={SendPhraseToEmail}>
+        <ClickableText screenWidth={width} onPress={sendPhraseToEmail}>
           Send me a backup email
         </ClickableText>
         <Button onPress={() => Alert.alert('Done!')} label={'DONE'} />
